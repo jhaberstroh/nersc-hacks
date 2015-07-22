@@ -77,7 +77,7 @@ if [ -z ${PBS_JOBID+x} ]; then
     export   GMX__TOPNAME=${GMX__TOPNAME?ERROR: var not set in config}
     # Create the output directory if it does not exist
     if [ ! -e $GMX__OUTDIR ]; then
-        mkdir $GMX__OUTDIR
+        mkdir -p $GMX__OUTDIR
     elif [ ! -d $GMX__OUTDIR ]; then
         echo "\$GMX__OUTDIR: $GMX__OUTDIR exists but is not a dir!"
         exit 1
