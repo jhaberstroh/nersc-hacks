@@ -1,8 +1,14 @@
 Chain-restart qsub script for gromacs on NERSC
 ================================================================================
-NOTE: .cfg file is sourced as a bash script. This means that you can reference
+NOTE 1: .cfg file is sourced as a bash script. This means that you can reference
 previous variables within the cfg script. However, make sure you trust the file 
 before executing any potentially malicious code!
+NOTE 2: This script assumes that all files in the OLDGRO folder (eg .cpt file)
+have the same basename as OLDGRO. For example, "npt.gro" and "npt.cpt". This
+script will create files that follow this protocol. Rename your existing files 
+to use this script if this protocol is not adhered to.
+NOTE 3: All gromacs files created with this method will be given the filename
+base of $GMX__MDP, but they will be contained in GMX__OUTDIR.
 
 module load    : load a custom version of gromacs, default 4.6.7-sp
 PBS__NPROCS    : int, number of processors to use
