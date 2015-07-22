@@ -1,0 +1,15 @@
+Chain-restart qsub script for gromacs on NERSC
+================================================================================
+
+PBS__NPROCS    : int, number of processors to use
+PBS__QUEUE     : str, name of queue (eg regular or debug)
+PBS__WALLTIME  : time, walltime string
+PBS__MAXSUBMIT : int, max number of chain-restarts
+grompp         : str, grompp exe command (usually "grompp_sp")
+mdrun          : str, mdrun exe command (usually "mdrun_sp -n $PBS__NPROCS")
+GMX__OLDGRO    : str, abs path to .gro file to start from WITHOUT EXTENSION
+GMX__OUTDIR    : str, abs path to output base dir, output will be in OUTDIR/MDP
+GMX__CONFDIR   : str, abs path to config (topology, forcefield, index groups, etc)
+GMX__MDPDIR    : str, abs path to mdp file
+GMX__MDP       : str, name of mdp file WITHOUT EXTENSION
+GMX__TOPNAME   : str, name of topology WITHOUT EXTENSION
