@@ -21,7 +21,8 @@
 #   gromacs.sh in same directory
 ################################################################################ 
 # Optional args: 
-#   PBS__NEXT_JOB_COUNTER: set >1 to restart from the middle
+#  GMX__CPT              : int, number of minutes between checkpoints
+#  PBS__NEXT_JOB_COUNTER : int, set >1 to restart from non-first chain link
 ################################################################################ 
 # Usage:                                                                       #
 #   Call script with $1 set to .cfg file (see example file).                   #
@@ -84,7 +85,8 @@ if [ -z ${PBS_JOBID+x} ]; then
     fi
     
     # Build jobname from name of config file
-    export OPT_NUMBER=${2-}
+    export     GMX__CPT=${GMX__CPT-5}
+    export   OPT_NUMBER=${2-}
     export PBS__JOBNAME=${1%.cfg}
     export PBS__NEXT_JOB_COUNTER=${PBS__NEXT_JOB_COUNTER-1}
     if [ ! -d $PBS__JOBNAME ]; then
@@ -144,6 +146,6 @@ else
     # Run continuation job (Second line specifies current .gro file)
     cd $GMX__OUTDIR
     $mdrun -v -cpi $GMX__OUTDIR/$GMX__MDP.cpt -s $GMX__OUTDIR/$GMX__MDP.tpr \
-        -deffnm $GMX__MDP -cpt 5
+        -deffnm $GMX__MDP -cpt $GMX__CPT
     cd -
 fi

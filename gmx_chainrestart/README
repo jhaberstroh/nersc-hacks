@@ -1,6 +1,10 @@
 Chain-restart qsub script for gromacs on NERSC
 ================================================================================
+NOTE: .cfg file is sourced as a bash script. This means that you can reference
+previous variables within the cfg script. However, make sure you trust the file 
+before executing any potentially malicious code!
 
+module load    : load a custom version of gromacs, default 4.6.7-sp
 PBS__NPROCS    : int, number of processors to use
 PBS__QUEUE     : str, name of queue (eg regular or debug)
 PBS__WALLTIME  : time, walltime string
@@ -13,3 +17,10 @@ GMX__CONFDIR   : str, abs path to config (topology, forcefield, idx grps, etc)
 GMX__MDPDIR    : str, abs path to mdp file
 GMX__MDP       : str, name of mdp file WITHOUT EXTENSION
 GMX__TOPNAME   : str, name of topology WITHOUT EXTENSION
+
+optional - can be passed in command line or in configuration
+===
+GMX__CPT              : int, number of minutes between checkpoints
+PBS__NEXT_JOB_COUNTER : int, job counter to start at (1-based index)
+
+

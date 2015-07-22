@@ -35,6 +35,7 @@ set -o nounset
    NEWNAME=${5?var not set}
 GROMPP_OPT=${6-}
  MDRUN_OPT=${7-}
+  GMX__CPT=${GMX__CPT-5}
 
 if [ -e $OLDGRO.cpt ]; then
     echo "Checkpoint file $OLDGRO.cpt found."
@@ -48,5 +49,5 @@ else
 fi
 
 cd $NEWDIR
-$mdrun -v -deffnm $NEWNAME -cpt 5 $MDRUN_OPT
+$mdrun -v -deffnm $NEWNAME -cpt $GMX__CPT $MDRUN_OPT
 cd -
